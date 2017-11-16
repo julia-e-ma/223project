@@ -1,0 +1,25 @@
+package com.company;
+import java.util.Arrays;
+import java.util.Collections;
+public class Main {
+
+    public static void main(String[] args) {
+
+        Card [] Deck= new Card[52];
+
+        // shuffle the deck, cards are assumed to be already made
+        Collections.shuffle(Arrays.asList(Deck));
+
+        // split deck into two hands
+        Card [] playerHand = new Card[26];
+        Card [] CPUHand= new Card[26];
+        for (int i=0; i<26; i++){
+            playerHand[i]=Deck[i];
+        }
+        for (int j=0; j<26; j++){
+            CPUHand[j]=Deck[j+26];
+        }
+    }
+
+
+}
