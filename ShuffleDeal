@@ -6,6 +6,11 @@ public class Main {
     public static void main(String[] args) {
 
         Card [] Deck= new Card[52];
+        /**for (int k=0; k>52; k++){
+            Card l=("k",k);
+            Deck k=l;
+
+        } */
 
         // shuffle the deck, cards are assumed to be already made
         Collections.shuffle(Arrays.asList(Deck));
