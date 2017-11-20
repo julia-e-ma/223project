@@ -1,28 +1,60 @@
 import java.util.*;
 import java.io.*;
 
-public class Card{
-  private String Suit;
-  private int value;
+public class Card
+{
+private int suit;
+private int value;
 
-  public Card(String s, int v){
-    Suit=s;
-    value=v;
-  }
+private static String[] suits = {"Diamonds","Hearts", "Spades","Clubs"};
+private static String[] values = {"2","3","4","5","6","7","8","9","T","J","Q","K","A"};
+private static int TOTAL_SUITS=4;
+private static int TOTAL_VALUES=13;
 
-  public void setSuit(String s){
-    Suit=s;
-  }
-
-  public void setValue(int v){
-    value=v;
-  }
-
-  public int getValue(){
-    return value;
-  }
-  
-  public String getSuit(){
-    return Suit;
-  }
+public Card()
+{
+   suit = -1;
+   value = -1;
 }
+
+public Card(int s, int v)
+{  
+   suit =s;
+   value=v;
+}
+
+
+public int getValue()
+{
+   return value;
+}
+
+public int getSuit()
+{
+   return suit;
+}
+
+public static int getNumSuits()
+{
+   return TOTAL_SUITS;
+} 
+
+public static int getNumValues()
+{
+   return TOTAL_VALUES;
+} 
+
+public String toString()
+{ 
+   return values[value] +" "+ suits[suit];
+
+}
+}
+
+
+
+
+
+
+
+
