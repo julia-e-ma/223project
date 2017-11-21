@@ -1,0 +1,51 @@
+package com.company;
+import java.util.Scanner;
+public class Main {
+
+    public static void main(String[] args) {
+        // write your code here
+        boolean continue=true; //at the end of a round we ask if the player wants to continue
+        int playerDiscard, CPUDiscard;
+        while ( continue){
+            int i = 0;
+            for (i, i < 26; i++) {
+
+                //compare player and cpu cards
+                //comparing the value field of the ith object in the array of cards, not sure how to call that...
+                //one is larger than the other
+                if (playerHand[i] > CPUHand[i]) {
+                    //player wins this round
+                    playerDiscard++;
+                } else if (CPUHand[i] > playerHand[i]) {
+                    //CPU wins this round
+                    CPUDiscard++;
+                }
+                //cards are the same
+                else {
+                    //function call that I dont know how to do
+                    war(i);
+                }
+            }
+            
+            //i want to make a function that does the whole war thing somewhat seperately from the rest of the gameplay thing
+            public static int war ( int i){
+                //basically skip three cards then compare the last set of cards
+                if (playerHand[i + 3] > CPUHand[i + 3]) {
+                  //player wins this round
+                    playerDiscard++;
+                } else if (CPUHand[i + 3] > playerHand[i + 3]) {
+                    //CPU wins this round
+                    CPUDiscard++;
+                } else {
+                    war(i);
+               }
+
+            }
+            //graphics majickss maybe
+        System.out.println("Please press the continue button to play the next round or the exit button to quit.");
+        //some button press triggering event to start the whole thing
+        //if continue button press, continue==true
+        //if exit button press, continue==false
+        }
+    }
+}
