@@ -37,6 +37,7 @@ public class Main {
                     //CPU wins this round
                     CPUDiscard++;
                 } else {
+                    //perhaps some recursion would do well here but I was not paying attention to how that works
                     war(i);
                }
 
