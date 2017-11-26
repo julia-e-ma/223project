@@ -1,0 +1,93 @@
+import java.util.*;
+import java.io.*;
+
+public class Deck {
+
+//This is the number of cards in the Deck without the 2 Jokers. 
+private final static int NUM_CARDS=52;
+
+private Card[] cards;
+private int cardsInDeck;
+private int top;//when a player draws a card, they draw from the top of the deck 
+
+public Deck()
+{   int top = 0;//the top of the deck will be the starting point of the array 
+    int index = 0;
+    int numSuits,numValues;
+    cards = new Card[NUM_CARDS];//sets up the official deck of cards 
+
+    numSuits = cards[0].getNumSuits();//This gives the deck class the total possible suits for a card
+    numValues = cards[0].getNumValues();//This gives the the Deck class the total possible values of a card
+    
+    for (int i=0; i<numSuits; i++)//this controls the suit type 
+      {
+         for (int j=0; j<numValues; j++)//this controls the card value 
+            {  
+               cards[index] = new Card(i,j);//this creates the new card with its respective suit and value 
+               index++;
+             }
+      }
+    cardsInDeck = index;
+ }
+    
+public int getCardsInDeck()//current number of cards in deck
+   {
+      return cardsInDeck;
+   }
+  
+public static int getTotalPossibleCardsInDeck()//total possible cards in deck
+   {
+      return NUM_CARDS;
+   }
+   
+public Card drawDeck()
+//this method removes and returns the top card from the deck.If there are no more cards it returns null
+{           int index = top;
+            if (index >=0 && index < NUM_CARDS)
+               {Card drawn = cards[index];
+               cards[index]= null;
+               cardsInDeck--;
+               top++;
+               return drawn;
+               }
+            else
+               { System.out.println("Error. Cannot draw from empty deck");
+                 return null;
+               }
+ }
+
+public void shuffleDeck()//allows you to shuffle the deck a certain amount of times to make sure
+//in gameplay that the deck won't be in chronological order
+//Each swap will occur between two random places in the deck 
+//The number of swaps performed is an estimate of what will produce a shuffled deck
+{
+   int swaps = 200;
+   int r1,r2;
+   Card myCard;
+   Random random = new Random();
+   
+   for (int i=0; i<swaps; i++)
+      {r1 = random.nextInt(cardsInDeck-1);//random is used to choose two positions in the deck to swap
+       r2 = random.nextInt(cardsInDeck-1);
+       myCard = cards[r1];//myCard is just a temp variable to hold a card during the swap
+       cards[r1]=cards[r2];
+       cards[r2]=myCard;
+       }
+}
+      
+
+public void printDeck()
+{
+   Card myCard; 
+   System.out.println("The Deck of Cards is:");  
+   for (int i=top; i<cardsInDeck; i++)       {
+         myCard = cards[i];
+         if (myCard != null)
+            System.out.println(myCard.toString());
+       }
+   System.out.println();
+}
+
+
+
+}
