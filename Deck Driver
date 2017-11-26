@@ -1,0 +1,79 @@
+import java.util.*;
+import java.io.*;
+
+
+//The purpose of the deck driver class is to show how the objects of card, deck, and pile can be created
+//and it is also here to test out the methods of these classes
+public class DeckDriver
+{
+
+public static void main (String[] args)
+
+{
+   Deck deck = new Deck();
+   Card player1Card;//a Card played during gameplay by player 1
+   Card player2Card;
+   
+   deck.printDeck();//print the deck prior to shuffling 
+   deck.shuffleDeck();
+   System.out.println("After shuffling");
+   deck.printDeck();// print the deck after shuffling
+   Pile p1Pile = new Pile();//the pile that player 1 will use
+   Pile p2Pile = new Pile();//the pile that player 2 will use 
+
+   for (int i=1; i<=10; i++)
+   //setting i temporarily to 10 just to test the program with fewer cards
+   //when using the for loop for the entire deck use i<=26 because each player will start with 26 cards 
+      {player1Card = deck.drawDeck();//player 1 is dealt a card from the deck
+       System.out.println("Dealing a card from the deck for player 1. Card is " + player1Card.toString());
+       p1Pile.addCard(player1Card);//the card is placed on top of player 1's gameplay pile
+       //the process will repeat for player 2 
+       player2Card = deck.drawDeck();
+       System.out.println("Dealing a card from the deck for player 2. Card is " + player2Card.toString());
+       p2Pile.addCard(player2Card);
+      }
+      
+   System.out.println("After drawing 10 cards each player 1's pile is");
+   p1Pile.printPile();
+   
+   System.out.println("After drawing 10 cards each player 2's pile is");
+   p2Pile.printPile();
+   
+   System.out.println("Player 1 plays top card in his pile");//This will show the last card dealt to player 1, the card on top of the deck 
+   player1Card = p1Pile.playCard();
+   System.out.println(player1Card.toString());
+   
+   System.out.println("Player 2 plays top card in his pile");
+   player2Card = p2Pile.playCard();
+   System.out.println(player2Card.toString());
+   
+   //this is where the winner will be determined
+   //by using the getValue method from the card class. 
+   if (player1Card.getValue() > player2Card.getValue())
+      System.out.println("Player 1 wins this battle");
+   else if (player2Card.getValue() > player1Card.getValue())
+      System.out.println("Player 2 wins this battle");
+   else
+      System.out.println("War!!!");
+      //for the war scenario you need to figure out a way to draw 3 cards from the deck and play the 4th one.
+      
+   //Assume just for testing that player 1 wins the battle then the two cards are placed
+   p1Pile.addBottom(player1Card);//at the bottom of player 1's pile
+   p1Pile.addBottom(player2Card);
+   System.out.println("If player 1 won the battle player 1's pile is");
+   p1Pile.printPile();   
+   System.out.println("and after losing the battle player 2's pile is");
+   p2Pile.printPile();
+
+    
+   }
+/* Things to consider when building the game class:
+The winner needs to win all 52 cards in order for the game to end
+We also need to make sure that the war gameplay will work even when a person doesn't have 4 cards to use in the war situation
+
+
+
+*/
+
+   
+}
