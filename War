@@ -1,0 +1,25 @@
+package com.company;
+
+public class War {
+    public static int War(int i, Pile playerHand, Pile CPUHand) {
+        // inputs are i, the round number. PD, the player discard counter. CD, the CPU discard counter.
+
+            //basically skip three cards then compare the last set of cards
+        int winner=0;
+        for (int j=0; j<3; j++){
+            playerHand.playCard();
+            CPUHand.playCard();
+        }
+            if (playerHand.playCard().getValue() > CPUHand.playCard().getValue()) {
+                //player wins this round
+                winner=1;
+            } else if (playerHand.playCard().getValue() < CPUHand.playCard().getValue()) {
+                //CPU wins this round
+                winner=2;
+            } else {
+                return War(i+3, playerHand, CPUHand);
+            }
+
+        return winner;
+    }
+}
