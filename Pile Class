@@ -4,50 +4,51 @@ import java.io.*;
 //An object of type pile is designed to hold a player's pile of cards during game play
 public class Pile {
 
-        private int cardsInPile = 0;
-        private int maxCardsInPile = 52;//the max amount is 52 because that's the max amount of cards 
-        //a player could win. 
-        private ArrayList<Card> pile;
-        
-public Pile()//declares the Pile object 
-{   
-   pile = new ArrayList<Card>(maxCardsInPile);
-   //52 is the largest size pile a player could have. 
-   //Using an array list here because it allows us to add the elements to either end of the pile
-   //arraylist also gives us access to methods like remove and get and add
-   
-}
- 
-      
-public Card playCard()
-//playCard plays the card on the top of the pile 
-{ Card myCard;  
-  int top = pile.size()-1;        
-  myCard = pile.get(top);
-  pile.remove(top); 
-  return myCard;              
- }
+    private int cardsInPile = 0;
+    private int maxCardsInPile = 26;//the max amount is 26 because that's the max amount of cards
+    //a player could win.
+    private ArrayList<Card> pile;
 
-// addCard places myCard on top of the pile 
-public void addCard(Card myCard)
- {      
-   pile.add(myCard);
-  }
+    public Pile()//declares the Pile object
+    {
+        pile = new ArrayList<Card>(maxCardsInPile);
+        //52 is the largest size pile a player could have.
+        //Using an array list here because it allows us to add the elements to either end of the pile
+        //arraylist also gives us access to methods like remove and get and add
 
-// addBottom places myCard on the bottom of the pile
-public void addBottom(Card myCard)
-{
-   pile.add(0,myCard);
-}
+    }
 
-//prints the pile of the player
-public void printPile()
-{
-    System.out.println("Player Pile:");  
-    for (int i=0; i<pile.size(); i++)
+
+    public Card playCard()
+//playCard plays the card on the top of the pile
+    { Card myCard;
+        int top = pile.size()-1;
+        myCard = pile.get(top);
+        pile.remove(top);
+        System.out.println(myCard.getSuit()+myCard.getValue());
+        return myCard;
+    }
+
+    // addCard places myCard on top of the pile
+    public void addCard(Card myCard)
+    {
+        pile.add(myCard);
+    }
+
+    // addBottom places myCard on the bottom of the pile
+    public void addBottom(Card myCard)
+    {
+        pile.add(0,myCard);
+    }
+
+    //prints the pile of the player
+    public void printPile()
+    {
+        System.out.println("Player Pile:");
+        for (int i=0; i<pile.size(); i++)
             System.out.println(pile.get(i)+" ");
-    System.out.println(); 
-}
+        System.out.println();
+    }
 
 
 
