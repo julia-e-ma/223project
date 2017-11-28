@@ -1,0 +1,67 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+public class Gameplay extends JFrame{
+	
+	//opening panel
+	JPanel pane = new JPanel();
+	//gameplay panel
+	JPanel gamePanel = new JPanel();
+	//Button to start game
+	JButton play = new JButton("New Game");
+	//Button to draw a card
+	JButton draw = new JButton("Draw a card");
+	//Opening text
+	JLabel title = new JLabel("Let's play a game of War!");
+	//Text fields for gameplay
+	JLabel yourScore = new JLabel("Your Score: ");
+	JLabel cpuScore = new JLabel("CPU Score: ");
+	JLabel cardsLeft = new JLabel("Cards Remaining in your hand: ");
+	Container con = this.getContentPane();
+	
+	
+	Gameplay(){
+		//set window
+		super("War!"); setSize(500,500);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);		
+		 //inherit main frame
+		//add elements
+		con.add(pane);
+		//set background color
+		pane.setBackground(Color.WHITE);
+		
+		pane.add(title);
+		
+		pane.add(play); play.requestFocus();
+		//button = red
+		play.setBackground(Color.RED);
+		//button actions
+		play.addActionListener(new PlayGameListener());
+		
+		
+		//set visible
+		setVisible(true);
+		
+		
+	}
+	private class PlayGameListener implements ActionListener{
+		public void actionPerformed(ActionEvent e){
+			// Set panel background to green
+			con.remove(pane);
+			con.add(gamePanel);
+			gamePanel.setBackground(Color.GREEN);
+			
+			gamePanel.add(yourScore);
+			gamePanel.add(cpuScore);
+			gamePanel.add(cardsLeft);
+			gamePanel.add(draw);
+			draw.setBackground(Color.BLACK);
+			draw.setForeground(Color.WHITE);
+			setVisible(true);
+		}
+	}
+			
+	public static void main(String[] args){
+		new Gameplay();
+	}
+}
