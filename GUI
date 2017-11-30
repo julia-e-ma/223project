@@ -1,6 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import javax.swing.JLabel;
+import java.awt.Font;
 public class Gameplay extends JFrame{
 	
 	//opening panel
@@ -14,47 +16,116 @@ public class Gameplay extends JFrame{
 	//Opening text
 	JLabel title = new JLabel("Let's play a game of War!");
 	//Text fields for gameplay
-	JLabel yourScore = new JLabel("Your Score: ");
-	JLabel cpuScore = new JLabel("CPU Score: ");
-	JLabel cardsLeft = new JLabel("Cards Remaining in your hand: ");
+	JLabel yourScoreLabel = new JLabel("Your Score: ");
+	Font font1 = new Font("Serif", Font.BOLD, 15);
+	Font font2 = new Font("Serif", Font.BOLD, 50);
+	Font font3 = new Font("Serif", Font.BOLD, 30);
+	
+	JLabel cpuScoreLabel = new JLabel("CPU Score: ");
+	
+	JLabel cardsLeftLabel = new JLabel("Turns remaining:");
+	
+	JLabel youLabel = new JLabel("You");
+	
+	JLabel cpuLabel = new JLabel("CPU");
+	
+	//Variables as JLabels
+	int yourScore = 0;
+	JLabel yourScoreValue = new JLabel(Integer.toString(yourScore));
+	
+	int cpuScore = 0;
+	JLabel cpuScoreValue = new JLabel(Integer.toString(cpuScore));
+	
+	int cardsLeft = 26;
+	JLabel cardsLeftValue = new JLabel(Integer.toString(cardsLeft));
+	
 	Container con = this.getContentPane();
 	
 	
 	Gameplay(){
 		//set window
-		super("War!"); setSize(500,500);
+		super("War!"); setSize(500,700);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);		
 		 //inherit main frame
 		//add elements
 		con.add(pane);
 		//set background color
 		pane.setBackground(Color.WHITE);
-		
+		pane.setLayout(new FlowLayout(FlowLayout.CENTER,500,150));
 		pane.add(title);
+		title.setFont(font3);
 		
-		pane.add(play); play.requestFocus();
+		pane.add(play);
 		//button = red
 		play.setBackground(Color.RED);
+		play.setPreferredSize(new Dimension(100,50));
 		//button actions
 		play.addActionListener(new PlayGameListener());
-		
 		
 		//set visible
 		setVisible(true);
 		
-		
 	}
 	private class PlayGameListener implements ActionListener{
 		public void actionPerformed(ActionEvent e){
-			// Set panel background to green
 			con.remove(pane);
 			con.add(gamePanel);
 			gamePanel.setBackground(Color.GREEN);
+			gamePanel.setLayout(new GridLayout(3,3));
 			
-			gamePanel.add(yourScore);
-			gamePanel.add(cpuScore);
-			gamePanel.add(cardsLeft);
+			JPanel blankPanel1 = new JPanel();
+			blankPanel1.setBackground(Color.GREEN);
+			JPanel blankPanel2 = new JPanel();
+			blankPanel2.setBackground(Color.GREEN);
+			JPanel blankPanel3 = new JPanel();
+			blankPanel3.setBackground(Color.GREEN);
+			JPanel blankPanel4 = new JPanel();
+			blankPanel4.setBackground(Color.GREEN);
+			JPanel blankPanel5 = new JPanel();
+			blankPanel5.setBackground(Color.GREEN);
+
+			
+			JPanel yourScorePanel = new JPanel();
+			yourScorePanel.setLayout(new FlowLayout(FlowLayout.CENTER, 50, 30));
+			yourScorePanel.setBackground(Color.GREEN);
+			yourScorePanel.add(youLabel);
+			youLabel.setFont(font2);
+			yourScorePanel.add(yourScoreLabel);
+			yourScoreLabel.setFont(font1);
+			yourScorePanel.add(yourScoreValue);
+			yourScoreValue.setFont(font3);
+			gamePanel.add(yourScorePanel);
+			
+			JPanel cardsLeftPanel = new JPanel();
+			cardsLeftPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 50, 10));
+			cardsLeftPanel.setBackground(Color.GREEN);
+			cardsLeftPanel.add(cardsLeftLabel);
+			cardsLeftLabel.setFont(font1);
+			cardsLeftPanel.add(cardsLeftValue);
+			cardsLeftValue.setFont(font3);
+			gamePanel.add(cardsLeftPanel);
+			
+			JPanel cpuScorePanel = new JPanel();
+			cpuScorePanel.setLayout(new FlowLayout(FlowLayout.CENTER, 50, 30));
+			cpuScorePanel.setBackground(Color.GREEN);
+			cpuScorePanel.add(cpuLabel);
+			cpuLabel.setFont(font2);
+			cpuScorePanel.add(cpuScoreLabel);
+			cpuScoreLabel.setFont(font1);
+			cpuScorePanel.add(cpuScoreValue);
+			cpuScoreValue.setFont(font3);
+			gamePanel.add(cpuScorePanel);
+			
+			gamePanel.add(blankPanel1);
+
 			gamePanel.add(draw);
+			
+			gamePanel.add(blankPanel2);
+			gamePanel.add(blankPanel3);
+			gamePanel.add(blankPanel4);
+			gamePanel.add(blankPanel5);
+			
+			
 			draw.setBackground(Color.BLACK);
 			draw.setForeground(Color.WHITE);
 			setVisible(true);
