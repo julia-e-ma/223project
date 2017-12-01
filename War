@@ -1,5 +1,3 @@
-package com.company;
-
 public class War {
     public static int War(int i, Pile playerHand, Pile CPUHand) {
         // inputs are i, the round number. PD, the player discard counter. CD, the CPU discard counter.
