@@ -1,0 +1,41 @@
+public class War2 {
+
+    public static int War(Pile playerHand, Pile CPUHand) {
+        
+        int winner=0;
+        Card pcard;
+        Card ccard;
+        
+        if (playerHand.getCardsInPile()<4 || CPUHand.getCardsInPile()<4)
+             {
+                System.out.println("Not enough cards left to do war.");
+                winner=0;
+             }
+        else 
+             {
+                //basically skip three cards then compare the last pair of cards
+                for (int j=0; j<3; j++){
+                    playerHand.playCard();
+                   CPUHand.playCard();
+                   }
+               pcard = playerHand.playCard();
+               ccard = CPUHand.playCard();
+               System.out.println("WAR: Player plays a " + pcard.toString());
+               System.out.println("WAR: CPU plays a " + ccard.toString());
+
+               if (pcard.getValue() > ccard.getValue()) 
+                //player wins this round
+                winner=1;
+               else if (pcard.getValue() < ccard.getValue()) 
+                //CPU wins this round
+                winner=2;
+               else 
+                //if there is a tie then war is called recursively
+                //return War(playerHand, CPUHand);
+                winner= War(playerHand, CPUHand);
+
+               }
+        return winner;
+        
+    }
+}
