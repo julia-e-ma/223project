@@ -84,8 +84,7 @@ public static void main(String[] args) {
                            pPlayed = pPile - playerHand.getCardsInPile();
                            cPlayed = cPile - CPUHand.getCardsInPile();
                            totalCardsPlayedThisWar = pPlayed + cPlayed;
-                           for (int i=0; i<totalCardsPlayedThisWar; i++)
-                              cardCount++;
+                           cardCount=cardCount+totalCardsPlayedThisWar;
                       }//else war
                    System.out.println("");                        
              }//end of while cardsInPile
