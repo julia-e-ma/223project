@@ -8,7 +8,7 @@ public class Gameplay2 extends JFrame{
 	JPanel pane = new JPanel();
 	JPanel gamePanel = new JPanel();
 	JButton draw = new JButton("Draw a card");
-	  boolean nextCard = true;
+	boolean nextCard = true;
 	boolean gameOver = false;
 	int playerDiscard;
 	int CPUDiscard;     
@@ -209,7 +209,6 @@ public class Gameplay2 extends JFrame{
                 cardCount++;
                 CPUCard = CPUHand.playCard();
                 cardCount++;
-
                 
 				}
 		}
