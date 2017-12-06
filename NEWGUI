@@ -1,0 +1,221 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.JLabel;
+import java.awt.Font;
+
+public class Gameplay2 extends JFrame{
+	JPanel pane = new JPanel();
+	JPanel gamePanel = new JPanel();
+	JButton draw = new JButton("Draw a card");
+	  boolean nextCard = true;
+	boolean gameOver = false;
+	int playerDiscard;
+	int CPUDiscard;     
+	int cPile,pPile;
+	int cPlayed,pPlayed;
+	int totalCardsPlayedThisWar;
+	int cardCount;
+	int winner;
+	int drawPoints;
+	
+	Deck deck = new Deck();
+	Pile playerHand = new Pile();//players hand
+	Pile CPUHand = new Pile();//the CPUs hand
+	Card playerCard;
+	Card CPUCard;
+	
+	//Opening text
+	JLabel yourScoreLabel = new JLabel("Your Score: ");
+	Font font1 = new Font("Serif", Font.BOLD, 15);
+	Font font2 = new Font("Serif", Font.BOLD, 50);
+	Font font3 = new Font("Serif", Font.BOLD, 30);
+	
+	JLabel cpuScoreLabel = new JLabel("CPU Score: ");
+	
+	JLabel cardsLeftLabel = new JLabel("Turns remaining:");
+	
+	JLabel youLabel = new JLabel("You");
+	
+	JLabel cpuLabel = new JLabel("CPU");
+	
+	//Variables as JLabels
+	int yourScore = playerDiscard;
+	JLabel yourScoreValue = new JLabel(Integer.toString(yourScore));
+	int cpuScore = CPUDiscard;
+	JLabel cpuScoreValue = new JLabel(Integer.toString(cpuScore));
+	int cardsLeft = 26;
+	JLabel cardsLeftValue = new JLabel(Integer.toString(cardsLeft));
+	Container con = this.getContentPane();
+	JLabel playerWins = new JLabel("You won this draw!");
+	JLabel cpuWins = new JLabel("CPU won this draw!");
+
+  
+
+	Gameplay2(){
+		//set window
+		super("War!"); setSize(500,700);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);		
+		con.add(gamePanel);
+		//set background color
+		gamePanel.setBackground(Color.GREEN);
+		
+		deck.shuffleDeck();
+		 // deal all the cards in the deck
+        while (deck.getCardsInDeck()>0){
+            playerHand.addCard(deck.drawDeck());
+            CPUHand.addCard(deck.drawDeck());
+            }        
+			
+		//Initialize the discard counters to zero, these indicate the score of each player
+        playerDiscard=0;
+        CPUDiscard=0;
+        
+        //Initialize card counter to zero; It keeps track of total cards played
+        cardCount = 0;
+        
+        //drawPoints is used to determine score in case of a draw, if there is a draw it is set to half the cards played in the war
+        drawPoints = 0;
+          
+		
+		gamePanel.setLayout(new GridLayout(3,3));
+		JPanel blankPanel1 = new JPanel();
+		blankPanel1.setBackground(Color.GREEN);
+		JPanel blankPanel2 = new JPanel();
+		blankPanel2.setBackground(Color.GREEN);
+		JPanel blankPanel3 = new JPanel();
+		blankPanel3.setBackground(Color.GREEN);
+		JPanel blankPanel4 = new JPanel();
+		blankPanel4.setBackground(Color.GREEN);
+		JPanel blankPanel5 = new JPanel();
+		blankPanel5.setBackground(Color.GREEN);
+		JPanel yourScorePanel = new JPanel();
+		JPanel cardsLeftPanel = new JPanel();
+		JPanel cpuScorePanel = new JPanel();
+   
+				playerCard = playerHand.playCard();
+                cardCount++;
+                CPUCard = CPUHand.playCard();
+                cardCount++;
+		if (playerCard.getValue() > CPUCard.getValue()) {
+                    //player wins this round
+                    playerDiscard+=2;
+					
+                    blankPanel1.setBackground(Color.GREEN);
+					blankPanel2.setBackground(Color.RED);
+                  } 
+                else if (playerCard.getValue() < CPUCard.getValue()) {
+                    //CPU wins this round
+                    CPUDiscard+=2;
+                    blankPanel1.setBackground(Color.RED);
+					blankPanel2.setBackground(Color.GREEN);
+                   }
+                //cards are the same
+                else {     
+                           blankPanel4.add(new JLabel("War!!"));
+                           pPile = playerHand.getCardsInPile();
+                           cPile = CPUHand.getCardsInPile();
+                           War w = new War();
+                           winner = w.War(playerHand, CPUHand);
+                           
+                           pPlayed = pPile - playerHand.getCardsInPile();
+                           cPlayed = cPile - CPUHand.getCardsInPile();
+                           totalCardsPlayedThisWar = pPlayed + cPlayed;
+                           cardCount = cardCount + totalCardsPlayedThisWar;
+
+                           
+                           if (winner==1)
+                                  {playerDiscard+=totalCardsPlayedThisWar+2;
+                                   System.out.println("Player won this war!");
+                                   }
+                            else if(winner==2)
+                                 {CPUDiscard+=totalCardsPlayedThisWar+2;
+                                  System.out.println("CPU won this war!");
+                                  }
+                            else
+                                 {System.out.println("War was a draw.");
+                                  drawPoints = (totalCardsPlayedThisWar+2)/2;
+                                  playerDiscard = playerDiscard + drawPoints;
+                                  CPUDiscard = CPUDiscard + drawPoints;
+                                 } 
+                                                     }//else war
+
+		yourScorePanel.setLayout(new FlowLayout(FlowLayout.CENTER, 50, 30));
+		yourScorePanel.setBackground(Color.GREEN);
+		yourScorePanel.add(youLabel);
+		youLabel.setFont(font2);
+		yourScorePanel.add(yourScoreLabel);
+		yourScoreLabel.setFont(font1);
+		yourScorePanel.add(yourScoreValue);
+		yourScoreValue.setText(Integer.toString(playerDiscard));
+		yourScoreValue.setFont(font3);
+		gamePanel.add(yourScorePanel);
+		
+	
+		cardsLeftPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 50, 10));
+		cardsLeftPanel.setBackground(Color.GREEN);
+		cardsLeftPanel.add(cardsLeftLabel);
+		cardsLeftLabel.setFont(font1);
+		cardsLeftPanel.add(cardsLeftValue);
+		cardsLeftValue.setFont(font3);
+		gamePanel.add(cardsLeftPanel);
+		
+		
+		cpuScorePanel.setLayout(new FlowLayout(FlowLayout.CENTER, 50, 30));
+		cpuScorePanel.setBackground(Color.GREEN);
+		cpuScorePanel.add(cpuLabel);
+		cpuLabel.setFont(font2);
+		cpuScorePanel.add(cpuScoreLabel);
+		cpuScoreLabel.setFont(font1);
+		cpuScorePanel.add(cpuScoreValue);
+		cpuScoreValue.setFont(font3);
+		cpuScoreValue.setText(Integer.toString(CPUDiscard));
+		gamePanel.add(cpuScorePanel);
+		
+		while (nextCard==true){
+			blankPanel1.add(new JLabel(playerCard.toString()));
+            blankPanel2.add(new JLabel(CPUCard.toString()));
+			nextCard=false;
+		}
+		gamePanel.add(blankPanel1);
+
+		gamePanel.add(draw);
+		draw.addActionListener(new DrawCardListener());
+		
+		gamePanel.add(blankPanel2);
+		gamePanel.add(blankPanel3);
+		gamePanel.add(blankPanel4);
+		gamePanel.add(blankPanel5);
+		
+		while (gameOver == true){
+			blankPanel4.setBackground(Color.BLUE);
+			blankPanel4.add(new JLabel("Game Over"));
+		}
+	
+		draw.setBackground(Color.BLACK);
+		draw.setForeground(Color.WHITE);
+		setVisible(true);
+		
+	}
+	
+	private class DrawCardListener implements ActionListener{
+		public void actionPerformed(ActionEvent e){
+			if (cardCount==52){
+				gameOver=true;	
+			}
+			else{
+				nextCard=true;
+				playerCard = playerHand.playCard();
+                cardCount++;
+                CPUCard = CPUHand.playCard();
+                cardCount++;
+
+                
+				}
+		}
+	}
+	
+	public static void main(String[] args){
+		new Gameplay2();
+	}
+}
