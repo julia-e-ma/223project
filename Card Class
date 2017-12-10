@@ -30,12 +30,12 @@ public Card(int s, int v)
 }
 
 
-public int getValue()
+public int getValue()//will return the number value of a particular card object
 {
    return value;
 }
 
-public int getSuit()
+public int getSuit()//will return the suit of a particular card object
 {
    return suit;
 }
@@ -50,7 +50,7 @@ public static int getNumValues()
    return TOTAL_VALUES;
 } 
 
-public String toString()
+public String toString()//will return the value and suit of a card into a string for display purpouses
 { 
    return values[value] +" "+ suits[suit];
 
