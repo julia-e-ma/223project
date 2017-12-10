@@ -75,7 +75,8 @@ public class Deck {
     }
 
 
-    public void printDeck()
+    public void printDeck()//not used in gameplay but included as a check to make sure other deck methods work correctly
+    //simply prints out the deck of cards from "top" to 'bottom'
     {
         Card myCard;
         System.out.println("The Deck of Cards is:");
