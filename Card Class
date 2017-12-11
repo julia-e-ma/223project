@@ -1,7 +1,18 @@
 
+
+
+
+
+
+
 import java.util.*;
 import java.io.*;
-//This is the Card object that can be used for card games.
+//
+//Class card can be used to create card objects  for card games
+//
+// by Sara Cho
+// 12/10/2017
+//
 public class Card
 {
 private int suit;//each card has a suit
@@ -14,52 +25,55 @@ private static String[] values = {"2","3","4","5","6","7","8","9","T","J","Q","K
 private static int TOTAL_SUITS=4;
 private static int TOTAL_VALUES=13;
 
-//This sets up the card constructor 
+//This card constructor intitalizes a card with an unassigned suit and value
 public Card()
 {
    suit = -1;
    value = -1;
 }
 
-//A card has two private integers, suit and value. These correspond to a position in the array suits and the array values.
+// This conctructor creates a card with two private integers, suit and value.
+// These correspond to a position in the array suits and the array values.
 // For example if for a card object s is 3 and v is 2, then the card is the 4 of clubs.
 public Card(int s, int v)
-{  
-   suit =s;
-   value=v;
+{  if (s >= 0 && s < TOTAL_SUITS)
+      if (v >= 0 && v < TOTAL_VALUES)
+            {suit =s;
+             value=v;}
+   else
+      System.out.println("Invalid card.");
 }
 
-
-public int getValue()//will return the number value of a particular card object
-{
+//getValue returns the number value of a particular card object
+public int getValue(){
    return value;
 }
 
-public int getSuit()//will return the suit of a particular card object
-{
+//getSuit returns the suit of a particular card object
+public int getSuit(){
    return suit;
 }
 
+// getNumSuits returns the value of the constant TOTAL_SUITS
 public static int getNumSuits()
 {
    return TOTAL_SUITS;
 } 
 
+// getNumValues returns the value of the constant TOTAL_VALUES
 public static int getNumValues()
 {
    return TOTAL_VALUES;
 } 
 
-public String toString()//will return the value and suit of a card into a string for display purpouses
-{ 
-   return values[value] +" "+ suits[suit];
+//toString returns the value and suit of a card as a string for display purposes
+public String toString(){  String cardinfo;
+   cardinfo = "Unassigned card";
+   if (suit >= 0 && suit < TOTAL_SUITS)
+      {if (value >= 0 && value < TOTAL_VALUES)
+             cardinfo = values[value] +" "+ suits[suit];}
+   return cardinfo;
+}
 
 }
-}
-
-
-
-
-
-
 
