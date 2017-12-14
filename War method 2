@@ -1,9 +1,12 @@
-public class War2 {
+public class War {
+	//written by Caroline and Amelia
 //this method does will run when the player and CPU cards have the same value
-//in the game, war plays out by dealing face down three cards from your hand and the CPU's hand and then comparing the next pair of cards
-//in real life, if you had fewer than four cards left in your hand, you would play cards facedown until you got to the final card
+//in the game, war plays out by dealing face down three cards from your hand and 
+//the CPU's hand and then comparing the next pair of cards in real life, 
+//if you had fewer than four cards left in your hand, you would play cards facedown until you got to the final card
 //you would then compare the last pair and whoever won got all the cards played in that round.
-//this proved too difficult for us to figure out so we decided that if there were not enough cards left to play that there would be a tie
+//this proved too difficult for us to figure out so we decided that if there were not enough cards
+// left to play that there would be a tie
     public static int War(Pile playerHand, Pile CPUHand) 
         {
         
@@ -25,8 +28,7 @@ public class War2 {
                    }
                pcard = playerHand.playCard();//placeholder for the player's card
                ccard = CPUHand.playCard();//placeholder for the CPU's card
-               System.out.println("WAR: Player plays a " + pcard.toString());//display the player's card
-               System.out.println("WAR: CPU plays a " + ccard.toString());//display the CPU's card
+         
 
                if (pcard.getValue() > ccard.getValue()) 
                 //player wins this round
