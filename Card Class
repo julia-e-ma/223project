@@ -1,10 +1,3 @@
-
-
-
-
-
-
-
 import java.util.*;
 import java.io.*;
 //
@@ -21,7 +14,7 @@ private int value;//and each card has a value
 //This array contains the 4 suits found in a deck of cards
 private static String[] suits = {"Diamonds","Hearts", "Spades","Clubs"};
 //This array contains all 13 values a card could have. This does not include the joker. 
-private static String[] values = {"2","3","4","5","6","7","8","9","T","J","Q","K","A"};
+private static String[] values = {"2 of","3 of","4 of","5 of","6 of","7 of","8 of","9 of","10 of","Jack of","Queen of","King of","Ace of"};
 private static int TOTAL_SUITS=4;
 private static int TOTAL_VALUES=13;
 
